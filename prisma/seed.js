@@ -4,9 +4,19 @@ const prisma = new PrismaClient();
 async function seed() {
     const createdCustomer = await prisma.customer.create({
         data: {
-            name: 'Alice'
+            name: 'Alice',
+            contact: {
+                create: {
+                    phone: "01234567890"
+                    email: "test@test.com"
+                }
+            }
+        },
+        include: {
+            contact: true
         }
     });
+
 
     console.log('Customer created', createdCustomer);
 
